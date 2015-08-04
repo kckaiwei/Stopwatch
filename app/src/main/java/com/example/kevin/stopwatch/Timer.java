@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 public class Timer extends AppCompatActivity {
     private boolean countingDown;
-    private int seconds;
+    private int seconds = 0;
 
 
     @Override
