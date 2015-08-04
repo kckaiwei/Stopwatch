@@ -1,5 +1,6 @@
 package com.example.kevin.stopwatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -80,6 +81,11 @@ public class StopwatchActivtiy extends AppCompatActivity {
     public void onClickReset(View view) {
         seconds = 0;
         running = false;
+    }
+
+    public void toTimer(View view){
+        Intent intent = new Intent(this, Timer.class);
+        startActivity(intent);
     }
 
     private void runTimer() {

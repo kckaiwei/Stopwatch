@@ -6,4 +6,8 @@
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="reset">Reset</string>
+    <string name="title_activity_timer">Timer</string>
+    <string name="pause">Pause</string>
+    <string name="switchtostopwatch">Switch to Stopwatch</string>
+    <string name="toTimer">Switch to Timer</string>
 </resources>
