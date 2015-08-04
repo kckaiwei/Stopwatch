@@ -1,6 +1,9 @@
 package com.example.kevin.stopwatch;
 
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +15,9 @@ import android.widget.EditText;
 public class Timer extends AppCompatActivity {
     private boolean countingDown;
     private int seconds = 0;
-
+    private boolean timeSet = false;
+    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+    Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +51,15 @@ public class Timer extends AppCompatActivity {
 
     public void onClickStart (View view) {
         countingDown = true;
+        if (seconds != 0){
+            timeSet = true;
+        }
 
     }
 
     public void onClickPause (View view){
         countingDown = false;
+        r.stop();
     }
 
     public void toStopwatch (View view){
@@ -65,6 +74,7 @@ public class Timer extends AppCompatActivity {
         handler.post(new Runnable() {
 
             public void run () {
+
                 try {
                     seconds = Integer.parseInt(timeText.getText().toString());
                 } catch (NumberFormatException nfe){
@@ -76,8 +86,12 @@ public class Timer extends AppCompatActivity {
 
                 String time = String.format("%d:%02d:%02d", hours, minutes, secs);
                 timeText.setText(time);
-                if (countingDown) {
+                if (countingDown && seconds != 0) {
                     seconds--;
+                }
+                if (seconds == 0 && timeSet){
+                    r.play();
+
                 }
                 handler.postDelayed(this,1000);
             }
